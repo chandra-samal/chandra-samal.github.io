@@ -3,102 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to my personal GitHub Pages site.">
-    <title>Chandra Sekhar Samal | Portfolio</title>
+    <title>Chandra Sekhar Samal - GitHub Page</title>
     <style>
+        /* General Styles */
+        :root {
+            --primary-color: #007BFF;
+            --background-color: #1a1a1a;
+            --text-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-hover-bg: rgba(255, 255, 255, 0.2);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] {
+            --primary-color: #007BFF;
+            --background-color: #f0f0f0;
+            --text-color: #333333;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-hover-bg: rgba(255, 255, 255, 1);
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="neon"] {
+            --primary-color: #00ff88;
+            --background-color: #0a0a0a;
+            --text-color: #ffffff;
+            --card-bg: rgba(0, 255, 136, 0.1);
+            --card-hover-bg: rgba(0, 255, 136, 0.2);
+            --shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-            color: #333;
-            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        header {
-            background: #007acc;
-            color: white;
-            padding: 1.5rem 0;
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: var(--shadow);
             text-align: center;
+            transition: background 0.3s ease;
         }
-        header h1 {
-            margin: 0;
+
+        h1 {
             font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
         }
-        header p {
-            margin: 0.5rem 0 0;
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
         }
-        nav {
-            margin: 2rem auto;
-            text-align: center;
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
         }
-        nav a {
+
+        .project-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .project-list li {
+            background: var(--card-bg);
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .project-list li:hover {
+            transform: translateY(-5px);
+            background: var(--card-hover-bg);
+        }
+
+        .project-list a {
+            color: var(--text-color);
             text-decoration: none;
-            color: #007acc;
-            margin: 0 1rem;
-            font-weight: bold;
+            font-size: 1.2rem;
+            display: block;
         }
-        nav a:hover {
+
+        .project-list a:hover {
             text-decoration: underline;
         }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: background 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--card-hover-bg);
+        }
+
+        .theme-toggle img {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            animation: fadeIn 1s ease-out;
         }
-        section {
-            margin: 2rem 0;
+
+        /* Neon Mode Glow Effects */
+        [data-theme="neon"] .container {
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
         }
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            background: #f4f4f4;
-            margin-top: 2rem;
+
+        [data-theme="neon"] .project-list li {
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
         }
-        footer p {
-            margin: 0;
-            color: #555;
+
+        [data-theme="neon"] .project-list li:hover {
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .project-list a {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>Chandra Sekhar Samal</h1>
-        <p>Welcome to my personal website</p>
-    </header>
-
-    <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
+<body data-theme="dark">
     <div class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Hi, I'm Chandra Sekhar Samal, a passionate Software Engineer. I enjoy building innovative solutions and exploring new technologies. Welcome to my personal website where I share my work and thoughts.</p>
-        </section>
+        <h1>Chandra Sekhar Samal</h1>
+        <p>Welcome to my GitHub Pages site! I'm an aspiring software developer</p>
+        
+        <h2>My Projects</h2>
+        <ul class="project-list">
+            <li>
+                <a href="https://github.com/chandra-samal/luma-os" target="_blank">Luma OS</a> - A lightweight operating system project.
+            </li>
+            <li>
+                <a href="https://github.com/chandra-samal/OSM-language" target="_blank">OSM Language</a> - A really basic programming language with an interpreter.
+            </li>
+        </ul>
 
-        <section id="projects">
-            <h2>Projects</h2>
-            <ul>
-                <li><a href="https://github.com/chandra-samal/OSM-language" target="_blank">OSM Language</a> - A simple programming language and an interpreter for it. </li>
-                <li><a href="https://github.com/chandra-samal/luma-os" target="_blank">Luma-OS</a> - An Operating System created from scatch, it is still under development. </li>
-                <!-- <li><a href="https://github.com/yourusername/project3" target="_blank">Project 3</a> - Brief description of my project.</li> -->
-            </ul>
-        </section>
-
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Feel free to reach out to me:</p>
-            <ul>
-                <li>Email: <a href="chandrasamal441@gmail.com">chandrasamal441@gmail.com</a></li>
-                <li>GitHub: <a href="https://github.com/chandra-samal" target="_blank">github.com/chandra-samal</a></li>
-                <li>LinkedIn: <a href="https://www.linkedin.com/in/linktosekhar/" target="_blank">linkedin.com/in/linkosekhar</a></li>
-            </ul>
-        </section>
+        <p>Feel free to explore my work!</p>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Chandra Sekhar Samal. Built with ❤️ and GitHub Pages.</p>
-    </footer>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="theme-toggle">
+        <img src="https://img.icons8.com/ios-filled/50/000000/sun.png" alt="Light Mode" id="theme-icon">
+    </button>
+
+    <script>
+        // Theme Toggle Script
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        const themes = ['dark', 'light', 'neon'];
+        let currentThemeIndex = 0;
+
+        themeToggle.addEventListener('click', () => {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const newTheme = themes[currentThemeIndex];
+            body.setAttribute('data-theme', newTheme);
+
+            // Update the icon based on the theme
+            if (newTheme === 'light') {
+                themeIcon.src = 'https://img.icons8.com/ios-filled/50/000000/moon.png';
+            } else if (newTheme === 'dark') {
+                themeIcon.src = 'https://img.icons8.com/ios-filled/50/000000/sun.png';
+            } else if (newTheme === 'neon') {
+                themeIcon.src = 'https://img.icons8.com/?size=100&id=vU8CBivPkd9r&format=png&color=000000';
+            }
+        });
+    </script>
 </body>
 </html>
